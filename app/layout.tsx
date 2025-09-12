@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./layout.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,16 +28,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-          <main className="flex flex-col gap-[32px] row-start-2 justify-center items-center">
-            <h1 className="scroll-m-20 text-center text-6xl font-extrabold tracking-tight text-balance">
-              StockSeer 🔮
-            </h1>
-            {children}
-          </main>
-          <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-            &copy; This is not real financial advice!
-          </footer>
+        <div className="app-container">
+          <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+            <main className="flex flex-col gap-[32px] row-start-2 justify-center items-center">
+              <h1 className="scroll-m-20 text-center text-6xl font-extrabold tracking-tight text-balance">
+                StockSeer 🔮
+              </h1>
+              {children}
+            </main>
+            <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+              &copy; This is not real financial advice!
+            </footer>
+          </div>
         </div>
       </body>
     </html>

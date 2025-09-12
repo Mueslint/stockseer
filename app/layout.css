@@ -1,0 +1,91 @@
+:root {
+  --star-color: rgba(255, 255, 255, 0.8); /* Brighter, more defined stars */
+  --star-size-1: 1px;
+  --star-size-2: 2px;
+  --star-size-3: 1.5px; /* Slightly different size for variety */
+  --star-spacing-1: 70px;
+  --star-spacing-2: 100px;
+  --star-spacing-3: 85px;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  color: white;
+  background-color: #000022; /* Very dark blue for a deep space feel */
+  overflow: hidden;
+}
+
+.app-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Star layer 1: Closest, brighter, faster */
+.app-container::before {
+  content: '';
+  position: absolute;
+  width: 200%; /* Larger to ensure coverage during animation */
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: radial-gradient(circle, var(--star-color) var(--star-size-1), transparent var(--star-size-1));
+  background-size: var(--star-spacing-1) var(--star-spacing-1);
+  animation: star-movement-1 40s linear infinite, star-twinkle 3s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+/* Star layer 2: Mid-distance, slightly larger, slower */
+.app-container::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: radial-gradient(circle, var(--star-color) var(--star-size-2), transparent var(--star-size-2));
+  background-size: var(--star-spacing-2) var(--star-spacing-2);
+  animation: star-movement-2 55s linear infinite, star-twinkle 4s ease-in-out infinite alternate;
+  z-index: -2;
+}
+
+/* Star layer 3: Farthest, smaller, slowest */
+.app-container .extra-stars { /* Needs an actual element, pseudo-elements only two */
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: radial-gradient(circle, var(--star-color) var(--star-size-3), transparent var(--star-size-3));
+  background-size: var(--star-spacing-3) var(--star-spacing-3);
+  animation: star-movement-3 70s linear infinite, star-twinkle 2.5s ease-in-out infinite alternate;
+  z-index: -3;
+}
+
+@keyframes star-movement-1 {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-150px, -150px); }
+}
+
+@keyframes star-movement-2 {
+  from { transform: translate(0, 0); }
+  to { transform: translate(180px, 180px); }
+}
+
+@keyframes star-movement-3 {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-80px, -80px); }
+}
+
+@keyframes star-twinkle {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}

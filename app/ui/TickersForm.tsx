@@ -12,8 +12,7 @@ export const TickersForm = ({
       <form action={addNewTicker}>
         <div>
           <Label htmlFor="ticker-input">
-            Add up to 3 stock tickers below to get a super accurate stock
-            predictions report👇
+            Add up to 3 stock tickers below to ask the spirits for advice!
           </Label>
           <div className="flex gap-[8px] mt-[8px]">
             <Input type="text" name="ticker" placeholder="MSFT" />

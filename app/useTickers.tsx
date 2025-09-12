@@ -7,7 +7,6 @@ export const useTickers = () => {
 
   useEffect(() => {
     const savedTickers = localStorage.getItem("stockseer-tickers");
-    console.log("Saved tickers from localStorage:", savedTickers);
     if (savedTickers) {
       try {
         setTickers(JSON.parse(savedTickers));
@@ -21,7 +20,6 @@ export const useTickers = () => {
   useEffect(() => {
     const hasExistingData = localStorage.getItem("stockseer-tickers") !== null;
     if (tickers.length > 0 || !hasExistingData) {
-      console.log("Saving tickers to localStorage:", tickers);
       localStorage.setItem("stockseer-tickers", JSON.stringify(tickers));
     }
   }, [tickers]);

@@ -19,11 +19,11 @@ const ReportPage = async ({ searchParams }: ReportPageProps) => {
     const stockReport = await fetchReport(stockData);
 
     return (
-      <section className="flex flex-col gap-[16px] items-center">
+      <section className="flex flex-col gap-[16px] items-center text-gray-700">
         <h1 className="font-bold text-xl text-gray-500">
           Report for {formattedTickers.join(", ")}
         </h1>
-        <div className="flex flex-col gap-[8px] max-w-lg mb-[8px] p-[16px] border border-gray-300 bg-gray-50 rounded">
+        <div className="flex flex-col gap-[8px] max-w-lg mb-[8px] p-[16px] border border-gray-300 bg-gray-200 rounded">
           {stockReport?.content?.split("\n\n").map((stockReport) => {
             return <span key={stockReport.slice(0, 10)}>{stockReport}</span>;
           })}
