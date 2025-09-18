@@ -19,7 +19,7 @@ const getChatPromptTemplate = (
 ];
 
 export const fetchReport = async (stockData: string[]) => {
-  const openai = new OpenAI();
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
