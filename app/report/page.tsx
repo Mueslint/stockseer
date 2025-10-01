@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { fetchStockData } from "../utils/fetch-stock";
-import { fetchReport } from "../utils/stock-report";
+import OpenAI from "openai";
 
 interface ReportPageProps {
   searchParams: Promise<{ tickers: string }>;
@@ -15,8 +14,25 @@ const ReportPage = async ({ searchParams }: ReportPageProps) => {
     : [];
 
   try {
-    const stockData = await fetchStockData(formattedTickers);
-    const stockReport = await fetchReport(stockData);
+    // TODO: Move this to a custom hook
+    console.log("Fetching report for tickers:", formattedTickers);
+    const stockReport: OpenAI.Chat.Completions.ChatCompletionMessage =
+      await fetch(
+        process.env.NODE_ENV === "development"
+          ? process.env.DEV_WORKER_URL!
+          : process.env.WORKER_URL!,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formattedTickers),
+        }
+      ).then((res) => res.json());
+
+    if (!stockReport?.content) {
+      throw new Error("No report found");
+    }
 
     return (
       <section className="flex flex-col gap-[16px] items-center text-gray-700">
